@@ -32,7 +32,7 @@ Example:
 
 import requests
 
-url = "https://example.com/products"
+url = "https://www.worldometers.info/coronavirus/#google_vignette"
 headers = {"User-Agent": "Mozilla/5.0"}
 response = requests.get(url, headers=headers)
 
