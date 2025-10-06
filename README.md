@@ -33,7 +33,9 @@ Example:
 import requests
 
 url = "https://www.worldometers.info/coronavirus/#google_vignette"
+
 headers = {"User-Agent": "Mozilla/5.0"}
+
 response = requests.get(url, headers=headers)
 
 if response.status_code == 200:
@@ -60,7 +62,9 @@ Key Functions: find(), find_all(), select(), get_text().
 Example:
 
 from bs4 import BeautifulSoup
+
 soup = BeautifulSoup(html_content, "html.parser")
+
 titles = soup.find_all("h2", class_="product-title")
 
 for t in titles:
@@ -79,12 +83,17 @@ Handles missing values, duplicates, type conversions, and filtering.
 Example:
 
 import pandas as pd
+
 data = [{"title": "Product A", "price": "$100"},
+
         {"title": "Product B", "price": "$200"}]
 
 df = pd.DataFrame(data)
+
 df['price'] = df['price'].str.replace('$','').astype(float)
+
 df.drop_duplicates(inplace=True)
+
 df.to_csv("data/products.csv", index=False)
 
 Enables ready-to-use datasets for analysis and visualization.
@@ -100,24 +109,17 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 sns.barplot(x="title", y="price", data=df)
+
 plt.title("Product Prices")
+
 plt.xlabel("Product")
+
 plt.ylabel("Price ($)")
+
 plt.show()
 
 
 Helps identify top products, trends, or outliers visually.
-
-Project Structure
-web-scraping-non-covid/
-│
-├── data/                     # CSV/JSON output files
-├── scripts/                  # Python scripts
-│   ├── scraper_static.py     # Scrape static websites using Requests & BS
-│   ├── scraper_dynamic.py    # Scrape dynamic websites using Selenium
-│   ├── data_cleaning.py      # Clean & preprocess scraped data
-│   └── visualization.py      # Generate visualizations
-├── README.md                 # P
 
 
 
