@@ -23,7 +23,9 @@ Modular scripts for easy customization and reuse.
 
 Key Libraries & Their Roles
 1. Requests
+   
 Purpose: Fetch HTML content from websites.
+
 Handles HTTP GET/POST requests, headers, cookies, and session management.
 
 Example:
@@ -41,16 +43,22 @@ else:
 
 
 Best Practices:
+
 Use headers to mimic browser requests.
+
 Implement retries and exception handling.
+
 Respect server rate limits.
 
 
 2. BeautifulSoup
+   
 Purpose: Parse HTML content and extract information.
+
 Key Functions: find(), find_all(), select(), get_text().
 
 Example:
+
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(html_content, "html.parser")
 titles = soup.find_all("h2", class_="product-title")
@@ -62,9 +70,10 @@ for t in titles:
 Supports CSS selectors, tags, attributes, and nested extraction.
 
 
-
 3. Pandas
+   
 Purpose: Clean, transform, and structure scraped data.
+
 Handles missing values, duplicates, type conversions, and filtering.
 
 Example:
@@ -81,11 +90,13 @@ df.to_csv("data/products.csv", index=False)
 Enables ready-to-use datasets for analysis and visualization.
 
 4. Visualization (Matplotlib & Seaborn)
+   
 Purpose: Visualize trends, patterns, and insights from scraped data.
 
 Example:
 
 import matplotlib.pyplot as plt
+
 import seaborn as sns
 
 sns.barplot(x="title", y="price", data=df)
@@ -112,9 +123,13 @@ web-scraping-non-covid/
 
 
 Key Takeaways
+
 Modular scraping for static and dynamic websites.
+
 Clean and structured datasets ready for analysis.
+
 Visualizations to gain actionable insights.
+
 Easy to expand and adapt for other domains or websites.
 
 
