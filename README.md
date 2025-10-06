@@ -1,14 +1,22 @@
-This project demonstrates web scraping of non-COVID-19 data from publicly available websites. The aim is to collect, clean, analyze, and visualize data to generate actionable insights. The project emphasizes modular, reusable code for scraping, data preprocessing, and visualization.
+This project demonstrates web scraping of non-COVID-19 data from publicly available websites. The aim is to collect, clean, analyze, and visualize data to generate actionable insights. The project emphasizes 
+modular, reusable code for scraping, data preprocessing, and visualization.
+
 The project is ideal for anyone learning Python for data extraction and analysis.
 
 Features
 
 Scrape data from static and dynamic websites.
+
 Extract and parse HTML using BeautifulSoup.
+
 Handle HTTP requests using requests.
+
 Store data in CSV and JSON formats.
+
 Clean and preprocess raw data using pandas.
+
 Visualize trends and patterns with matplotlib and seaborn.
+
 Modular scripts for easy customization and reuse.
 
 
