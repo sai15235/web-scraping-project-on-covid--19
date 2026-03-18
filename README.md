@@ -1,145 +1,106 @@
-This project demonstrates web scraping of non-COVID-19 data from publicly available websites. The aim is to collect, clean, analyze, and visualize data to generate actionable insights. The project emphasizes 
-modular, reusable code for scraping, data preprocessing, and visualization.
+#  COVID-19 Global Data Scraper & Analyzer
 
-The project is ideal for anyone learning Python for data extraction and analysis.
+A Python-based web scraping and data analysis project that extracts real-time COVID-19 statistics from [Worldometers](https://www.worldometers.info/coronavirus/) and produces country- and continent-level insights through data cleaning and visualizations.
 
-Features
+---
 
-Scrape data from static and dynamic websites.
+##  Overview
 
-Extract and parse HTML using BeautifulSoup.
+This project demonstrates an end-to-end data pipeline:
 
-Handle HTTP requests using requests.
+1. **Scraping** — Fetches live HTML from Worldometers using `requests` with browser-mimicking headers
+2. **Parsing** — Extracts the COVID-19 country table using `BeautifulSoup`
+3. **Structuring** — Builds a `pandas` DataFrame with 22 columns and ~230 country rows
+4. **Cleaning** — Removes commas from numeric strings, handles missing values, and drops summary/footer rows
+5. **Analyzing** — Groups data by continent, filters by case thresholds, and computes descriptive statistics
+6. **Visualizing** — Produces univariate and multivariate charts using `matplotlib` and `seaborn`
 
-Store data in CSV and JSON formats.
+---
 
-Clean and preprocess raw data using pandas.
+##  Dataset
 
-Visualize trends and patterns with matplotlib and seaborn.
+Data is scraped live from `worldometers.info/coronavirus` and includes the following fields per country:
 
-Modular scripts for easy customization and reuse.
+| Column | Description |
+|---|---|
+| `Country,Other` | Country or territory name |
+| `TotalCases` | Cumulative confirmed cases |
+| `TotalDeaths` | Cumulative deaths |
+| `TotalRecovered` | Cumulative recoveries |
+| `ActiveCases` | Currently active cases |
+| `Serious,Critical` | Patients in serious/critical condition |
+| `TotalTests` | Total tests conducted |
+| `Population` | Country population |
+| `Continent` | Continent classification |
+| `Deaths/1M pop` | Deaths per million population |
+| `Tot Cases/1M pop` | Cases per million population |
+| … | + additional per-capita and ratio columns |
 
+The scraped data is saved locally as `covid_data.csv`.
 
+---
 
-Key Libraries & Their Roles
-1. Requests
-   
-Purpose: Fetch HTML content from websites.
+##  Visualizations
 
-Handles HTTP GET/POST requests, headers, cookies, and session management.
+- **Histogram** — Distribution of total cases across countries
+- **Bar Chart** — Top countries by total cases
+- **Stacked Bar Chart** — Cases, deaths, and recoveries grouped by continent
 
-Example:
+---
 
-import requests
+##  Tech Stack
 
-url = "https://www.worldometers.info/coronavirus/#google_vignette"
+| Library | Purpose |
+|---|---|
+| `requests` | HTTP requests to fetch web pages |
+| `BeautifulSoup` (`bs4`) | HTML parsing and table extraction |
+| `pandas` | Data manipulation and CSV export |
+| `matplotlib` | Base plotting |
+| `seaborn` | Statistical visualizations |
+| `re` | Regular expressions for text cleaning |
 
-headers = {"User-Agent": "Mozilla/5.0"}
+---
 
-response = requests.get(url, headers=headers)
+##  Getting Started
 
-if response.status_code == 200:
-    html_content = response.text
-else:
-    print("Failed to retrieve data")
+### Prerequisites
 
+```bash
+pip install requests beautifulsoup4 pandas matplotlib seaborn
+```
 
-Best Practices:
+### Run the Notebook
 
-Use headers to mimic browser requests.
+```bash
+jupyter notebook web_scraping_final_project.ipynb
+```
 
-Implement retries and exception handling.
+The notebook will:
+1. Fetch the latest COVID-19 data from Worldometers
+2. Parse and clean the HTML table
+3. Save a `covid_data.csv` file in the working directory
+4. Render all analysis and visualizations inline
 
-Respect server rate limits.
+---
 
+##  Project Structure
 
-2. BeautifulSoup
-   
-Purpose: Parse HTML content and extract information.
+```
+├── web_scraping_final_project.ipynb   # Main notebook
+├── covid_data.csv                     # Exported dataset (generated on run)
+└── README.md
+```
 
-Key Functions: find(), find_all(), select(), get_text().
+---
 
-Example:
+##  Notes
 
-from bs4 import BeautifulSoup
+- The scraper sends a `User-Agent` header to avoid being blocked by the website's bot detection.
+- Some columns (e.g., `NewCases`, `NewDeaths`) are sparsely populated because Worldometers only updates them during active reporting periods.
+- Summary rows (World total, continent totals) are dropped during cleaning to keep only country-level records.
 
-soup = BeautifulSoup(html_content, "html.parser")
+---
 
-titles = soup.find_all("h2", class_="product-title")
+## 📄 License
 
-for t in titles:
-    print(t.get_text(strip=True))
-
-
-Supports CSS selectors, tags, attributes, and nested extraction.
-
-
-3. Pandas
-   
-Purpose: Clean, transform, and structure scraped data.
-
-Handles missing values, duplicates, type conversions, and filtering.
-
-Example:
-
-import pandas as pd
-
-data = [{"title": "Product A", "price": "$100"},
-
-        {"title": "Product B", "price": "$200"}]
-
-df = pd.DataFrame(data)
-
-df['price'] = df['price'].str.replace('$','').astype(float)
-
-df.drop_duplicates(inplace=True)
-
-df.to_csv("data/products.csv", index=False)
-
-Enables ready-to-use datasets for analysis and visualization.
-
-4. Visualization (Matplotlib & Seaborn)
-   
-Purpose: Visualize trends, patterns, and insights from scraped data.
-
-Example:
-
-import matplotlib.pyplot as plt
-
-import seaborn as sns
-
-sns.barplot(x="title", y="price", data=df)
-
-plt.title("Product Prices")
-
-plt.xlabel("Product")
-
-plt.ylabel("Price ($)")
-
-plt.show()
-
-
-Helps identify top products, trends, or outliers visually.
-
-
-
-
-Key Takeaways
-
-Modular scraping for static and dynamic websites.
-
-Clean and structured datasets ready for analysis.
-
-Visualizations to gain actionable insights.
-
-Easy to expand and adapt for other domains or websites.
-
-
-GitHub: https://github.com/sai15235
-
-LinkedIn: https://www.linkedin.com/in/saikiran-reddy-2b6842298
-
-Email: saikiranr717@gmail.com
-
-
-If you have any questions, suggestions, or want to collaborate, feel free to DM me or reach out via GitHub/LinkedIn. I’d be happy to help!
+This project is for educational purposes. Data belongs to [Worldometers](https://www.worldometers.info/coronavirus/).
